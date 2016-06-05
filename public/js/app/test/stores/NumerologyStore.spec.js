@@ -37,6 +37,5 @@ describe('Numerology Store', () => {
       done();
     });
     channel.channel.publish(`${sc.Base}.${sc.ActionTypes.CALCULATION}.${sc.States.REQUEST}`, {text: 'puff the magic dragon'});
-
   });
 });
