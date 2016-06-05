@@ -4,12 +4,15 @@
  * @description Provides Service for Calculating the Numerological Value of a Phrase
  */
 
-const _ = require('underscore'),
-async = require('async');
 //jshint is throwing an error claiming that I'm redefing Promise (not true as far a I can tell)
+
+var _, async, Promise,
+  calculate, calculationListener, init, nc, numerologyChannel, positionMap;
+
+_ = require('underscore');
+async = require('async');
 Promise = require('promise');
 
-var calculate, calculationListener, init, nc, numerologyChannel, positionMap;
 
 numerologyChannel = require('../channels').numerology;
 nc = numerologyChannel.constants;
