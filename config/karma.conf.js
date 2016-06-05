@@ -7,12 +7,13 @@ module.exports = function (config) {
         basePath: '../',
         browsers: ['PhantomJS'],
         files: ['public/js/app/test/tests.bundle.js'],
-        frameworks: ['jasmine'],
+        frameworks: ['jasmine', 'jasmine-matchers'],
         plugins: [
             require('karma-webpack'),
             'karma-spec-reporter',
             'karma-jasmine',
-            'karma-phantomjs-launcher'
+            'karma-phantomjs-launcher',
+            'karma-jasmine-matchers'
         ],
         preprocessors: {
             'public/js/app/test/tests.bundle.js': 'webpack'
