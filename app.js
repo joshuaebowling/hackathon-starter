@@ -9,15 +9,14 @@ const logger = require('morgan');
 const errorHandler = require('errorhandler');
 const lusca = require('lusca');
 const dotenv = require('dotenv');
-const MongoStore = require('connect-mongo')(session);
 const flash = require('express-flash');
 const path = require('path');
-const mongoose = require('mongoose');
 const passport = require('passport');
 const expressValidator = require('express-validator');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
+const RedisStore = require('connect-redis')(session);
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -42,19 +41,11 @@ const passportConfig = require('./config/passport');
  */
 const app = express();
 
-/**
- * Connect to MongoDB.
-mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
-mongoose.connection.on('error', () => {
-  console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
-  process.exit(1);
-});
-*/
 
 /**
  * Express configuration.
  */
-app.set('port', process.env.PORT || 8080);
+app.set('port', 8080);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(compression());
@@ -66,17 +57,15 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
-/*
 app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: process.env.SESSION_SECRET,
-  store: new MongoStore({
-    url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
-    autoReconnect: true
+  store: new RedisStore({
+    host: '127.0.0.1',
+    port: 6379
   })
 }));
-*/
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -123,6 +112,50 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
+/**
+ * API examples routes.
+ */
+app.get('/api', apiController.getApi);
+app.get('/api/lastfm', apiController.getLastfm);
+app.get('/api/nyt', apiController.getNewYorkTimes);
+app.get('/api/aviary', apiController.getAviary);
+app.get('/api/steam', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getSteam);
+app.get('/api/stripe', apiController.getStripe);
+app.post('/api/stripe', apiController.postStripe);
+app.get('/api/scraping', apiController.getScraping);
+app.get('/api/twilio', apiController.getTwilio);
+app.post('/api/twilio', apiController.postTwilio);
+app.get('/api/clockwork', apiController.getClockwork);
+app.post('/api/clockwork', apiController.postClockwork);
+app.get('/api/foursquare', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getFoursquare);
+app.get('/api/tumblr', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getTumblr);
+app.get('/api/facebook', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getFacebook);
+app.get('/api/github', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getGithub);
+app.get('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getTwitter);
+app.post('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postTwitter);
+app.get('/api/venmo', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getVenmo);
+app.post('/api/venmo', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postVenmo);
+app.get('/api/linkedin', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getLinkedin);
+app.get('/api/instagram', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getInstagram);
+app.get('/api/yahoo', apiController.getYahoo);
+app.get('/api/paypal', apiController.getPayPal);
+app.get('/api/paypal/success', apiController.getPayPalSuccess);
+app.get('/api/paypal/cancel', apiController.getPayPalCancel);
+app.get('/api/lob', apiController.getLob);
+app.get('/api/bitgo', apiController.getBitGo);
+app.post('/api/bitgo', apiController.postBitGo);
+app.get('/api/upload', apiController.getFileUpload);
+app.post('/api/upload', upload.single('myFile'), apiController.postFileUpload);
+app.get('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getPinterest);
+app.post('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postPinterest);
+
+/**
+ * OAuth authentication routes. (Sign in)
+ */
+app.get('/auth/instagram', passport.authenticate('instagram'));
+app.get('/auth/instagram/callback', passport.authenticate('instagram', { failureRedirect: '/login' }), (req, res) => {
+  res.redirect(req.session.returnTo || '/');
+});
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
   res.redirect(req.session.returnTo || '/');
