@@ -27,7 +27,7 @@ NumeraWord = react.createClass({
   },
   showLetters: function() {
     console.log('show letters');
-    NumeraChannel.showLetters(this.state.);
+    NumeraChannel.showLetters('test');
   },
   render: function() {
     return <td><span>test</span></td>
