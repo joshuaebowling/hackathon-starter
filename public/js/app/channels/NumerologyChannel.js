@@ -1,7 +1,8 @@
 /**
  * @class NumerologyChannel
  * @version 1.0.0
- * @description Provides Service for Calculating the Numerological Value of a P, utils*/
+ * @description Provides Service for Calculating the Numerological Value of a P, utils
+ */
 var _ = require('underscore'),
 Promise = require('promise');
 
