@@ -22,7 +22,7 @@ bower_components
 
 # documentation directory
 doc
-server/test/bin
+
 # Editors
 .idea
 *.iml

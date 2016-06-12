@@ -9,8 +9,6 @@ For Original Hackathon README, please go [here](https://github.com/sahat/hackath
 #### after cloning, `npm install`
 #### bundling client script `npm run webpack`
 #### fire it up `npm start`
-#### install selenium `npm run setup-webdriver`
-#### test client `npm run test`
 
 ### setup for grunt tasks
 #### `npm i grunt grunt-cli -g`
@@ -45,5 +43,7 @@ Installation instructions for Ubuntu 14.04 [here](https://www.digitalocean.com/c
 ### OrientDB replacing MongoDB
 ### Implement Bower when more client libraries are required
 ### Falcor
+#### folder `server` contains some falcor examples which will be used in adding falcor to app
+
 ### Rewriting "hackathon-starter" server-side unit tests using Jasmine instead of Mocha.
 ### Many other, smaller changes see `issues` tab

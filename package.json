@@ -7,10 +7,8 @@
   },
   "scripts": {
     "start": "node app.js",
-    "setup-webdriver": "(mkdir server/test/bin; cd server/test/bin; curl -O http://selenium-release.storage.googleapis.com/2.51/selenium-server-standalone-2.51.0.jar server/test)",
-    "start-webdriver": "java -jar server/test/bin/selenium-server-standalone-2.51.0.jar",
     "test-client": "karma start config/karma.conf.js",
-    "test": "npm run test-client; mocha --reporter spec --timeout 5000",
+    "test": "npm run test-client;",
     "webpack": "webpack --config config/webpack.config.js"
   },
   "dependencies": {
