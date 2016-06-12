@@ -30,7 +30,7 @@ NumeraResult = React.createClass({
   render: function() {
     return (
     <div>
-      <table class="table-responsive">
+      <table className="table table-responsive">
         <tbody>
           <NumeraWords />
           <NumeraWordValues />

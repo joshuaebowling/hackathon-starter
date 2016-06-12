@@ -33,7 +33,7 @@ NumeraWordLetters = React.createClass({
   },
   render: function() {
     var result =
-    <table class="table-responsive">
+    <table className="table table-responsive table-striped">
       <tbody>
         <tr style={{minWidth:'50px'}}>
          { _.map(this.state.letters,(letter) => {

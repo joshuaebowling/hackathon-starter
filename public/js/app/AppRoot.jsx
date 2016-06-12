@@ -8,7 +8,6 @@ var App;
 App = React.createClass({
 	render: function() {
 		return <div>
-		<h1>hello!!!</h1>
 		<section>
 			<NumeraInput></NumeraInput>
 		</section>
