@@ -4,19 +4,14 @@
  * @description Provides Service for Calculating the Numerological Value of a Phrase
  */
 
-//jshint is throwing an error claiming that I'm redefing Promise (not true as far a I can tell)
+const _ = require('underscore'),
+  async = require('async'),
+  Promise = require('promise');
 
-var _, async, Promise,
-  calculate, calculationListener, init, nc, numerologyChannel, positionMap;
-
-_ = require('underscore');
-async = require('async');
-Promise = require('promise');
-
+var calculate, positionMap,
+  _calculationListener, _init, numerologyChannel;
 
 numerologyChannel = require('../channels').numerology;
-nc = numerologyChannel.constants;
-
 /**
 * @function positionMap
 * @memberOf _NumerologyStore#
@@ -29,6 +24,7 @@ positionMap = function() {
   abc = 'abcdefghijklmnopqurstuvwxyz';
   arrAbc = abc.split('');
   calcNumera = function(index) {
+    'use strict';
     // these values have proven to be problematic in the loop, so reduce them conditionally
     if(index === 10 || index == 19) return 1;
     // if the index is already one digit in length, return it
@@ -54,6 +50,7 @@ positionMap = function() {
 * @returns {Object} $q.deferred.promise
 */
 calculate = function(inTxt = '') {
+  'use strict';
   var _calculate, format, numerize;
   /**
      * Get the formetted value of the input with only a-z, lowercase -- everything else is removed
@@ -72,7 +69,6 @@ calculate = function(inTxt = '') {
      * @return {Number}
   */
   numerize = function(val = 0) {
-
     if(!_.isNumber(val)) return 0;
 
     var isOneLen, _numerize, nums, ranOnce;
@@ -157,32 +153,33 @@ calculate = function(inTxt = '') {
       resolve(result);
     });
   };
-//  console.log(`${numerologyChannel.constants.Base}.${numerologyChannel.constants.ActionTypes.CALCULATE}.${numerologyChannel.constants.States.RESPONSE}`);
-//  numerologyChannel.channel.publish(`${numerologyChannel.constants.Base}.${numerologyChannel.constants.ActionTypes.CALCULATE}.${numerologyChannel.constants.States.RESPONSE}`, {test: 'data'});
   return _calculate(format(inTxt));
 };
 
 /**
-* @function calculationListener
+* @function _calculationListener
 * @memberOf NumerologyStore#
 * @description triggers calculation function via channel
 * @returns {null}
 */
-calculationListener = function(inText) {
+_calculationListener = function(inText) {
+  'use strict';
   var result = calculate(inText);
+
   result.then((result) => {
     numerologyChannel.channel.publish(`${numerologyChannel.constants.Base}.${numerologyChannel.constants.ActionTypes.CALCULATE}.${numerologyChannel.constants.States.RESPONSE}`, result);
   });
 };
 
-init = function() {
+_init = function() {
+  'use strict';
   numerologyChannel.channel.subscribe(`${numerologyChannel.constants.Base}.${numerologyChannel.constants.ActionTypes.CALCULATE}.${numerologyChannel.constants.States.REQUEST}`, (data) => {
-    calculationListener(data.text);
+    _calculationListener(data.text);
   });
   numerologyChannel.channel.publish(`${numerologyChannel.constants.Base}.${numerologyChannel.constants.ActionTypes.CALCULATE}.${numerologyChannel.constants.States.REQUEST}`, {data:' tast'});
 };
 
-init();
+_init();
 
 module.exports = {
   calculate: calculate,

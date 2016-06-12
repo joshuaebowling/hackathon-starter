@@ -1,42 +1,37 @@
 /**
- * @class NumeraInput
+ * @class NumeraWordValue
  * @version 1.0.0
- * @description React Component, text input for triggering numerological calculation
+ * @description React Component, tcontains the numerogical value (numera) of a given word from the word set
  */
 
-const
- _ = require('underscore');
+const _ = require('underscore'),
+  React = require('react');
 
-var React,
-  NumeraChannel, NumeraWordValues;
-
-React = require('react');
+var NumeraChannel, NumeraWordValues;
 
 NumeraChannel = require('../../channels').numerology;
 NumeraWordValues = React.createClass({
   getInitialState: function() {
-    var self;
-    self = this;
-    // decoded to state object
-    return {numeras: []}; 
+    'use strict';
+    return { numeras: [] }; 
   },
   componentDidMount: function() {
-    var route, self, consts;
+    'use strict';
+    var consts, route, self;
 
     self = this;
     // subscribe when the calculation event is finished
     consts = NumeraChannel.constants;
-    route = `${consts.Base}.${consts.ActionTypes.CALCULATE}.${consts.States.RESPONSE}`;
+    route = `${ consts.Base }.${ consts.ActionTypes.CALCULATE }.${ consts.States.RESPONSE }`;
     NumeraChannel.channel.subscribe(route, (data) => {
-      console.log(data);
-      self.setState({numeras: _.pluck(data, 'numera')});
+      self.setState({ numeras: _.pluck(data, 'numera') });
     });
   },
   render: function() {
     var result = 
       <tr>
        { this.state.numeras.map((numera) => {
-          return <td> {numera} </td>
+          return <td> { numera } </td>
         }) }
       </tr>;
     return result;

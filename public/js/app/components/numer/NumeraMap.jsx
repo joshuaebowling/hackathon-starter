@@ -1,25 +1,27 @@
-'use strict';
+/**
+ * @class NumeraMap
+ * @version 1.0.0
+ * @description React Component, a JSON representation of numera data model based on input
+ */
 
-var React,
- Numera, NumeraStore;
 
-React = require('react');
+const React = require('react');
 
-NumeraStore = require('../../stores/NumerologyStore');
+var Numera, NumeraStore;
+
+NumeraStore = require('../../stores/').numerology;
 Numera  = React.createClass({
   getInitialState: function() {
-    var self;
-    self = this;
-    console.log(NumeraStore.numeras);
-    return {map: NumeraStore.numeras};
+    'use strict';
+    return { map: NumeraStore.numeras };
   },
   componentDidMount: function() {
-    var self;
+    'use strict';
   },
   render: function() {
     return <div>
       <pre>
-        {JSON.stringify(this.state.map, null, 2)}
+        { JSON.stringify(this.state.map, null, 2) }
       </pre>
     </div>
   }

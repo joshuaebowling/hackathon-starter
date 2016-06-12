@@ -16,7 +16,7 @@ For Original Hackathon README, please go [here](https://github.com/sahat/hackath
 ### Rendering Documentation
 #### install jsdoc globally `npm i jsdoc -g`
 #### configure `config/jsdoc.conf.json` for any changes you deem necessary
-#### `grunt jsdoc`
+#### `npm run document`
 Thereafter, you should browse to folder `docs` to view generated content
 
 ### JSHint
@@ -38,6 +38,9 @@ Installation instructions for Ubuntu 14.04 [here](https://www.digitalocean.com/c
 ### Additions
 * Jsdoc
 * jshint (not configured and still experiencing some es6 bugs, in particular reassignment errors which don't seem like reassignments to me)
+
+### The Numerology Components
+I'm using postal.js and a pattern I'm deriving as a consequence instead of the Flux pattern. 
 
 ## Roadmap
 ### OrientDB replacing MongoDB
