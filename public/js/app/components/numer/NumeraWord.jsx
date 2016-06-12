@@ -4,30 +4,23 @@
  * @description React Component, text input for triggering numerological calculation
  */
 
-const
- _ = require('underscore');
+const _ = require('underscore'),
+  React = require('React');
 
-var NumeraChannel, NumeraWord, react;
-
-react = require('React');
+var NumeraChannel, NumeraWord;
 
 NumeraChannel = require('../../channels').numerology;
-NumeraWord = react.createClass({
+NumeraWord = React.createClass({
   getInitialState: function() {
-    var self;
-    self = this;
-    // decoded to state object
-    return {NumeraWord: null}; 
+    'use strict';
+    return { NumeraWord: null }; 
   },
   componentDidMount: function() {
-    var route, self, consts;
-
-    self = this;
-    // subscribe when the calculation event is finished
+    'use strict';
   },
-  showLetters: function() {
-    console.log('show letters');
-    NumeraChannel.showLetters('test');
+  showLetters: function(word) {
+    'use strict';
+    NumeraChannel.showLetters(word);
   },
   render: function() {
     return <td><span>test</span></td>

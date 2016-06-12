@@ -9,7 +9,9 @@
     "start": "node app.js",
     "test-client": "karma start config/karma.conf.js",
     "test": "npm run test-client;",
-    "webpack": "webpack --config config/webpack.config.js"
+    "webpack": "webpack --config config/webpack.config.js",
+    "document": "grunt jsdoc",
+    "jshint":"grunt jshint"
   },
   "dependencies": {
     "async": "^2.0.0-rc.4",

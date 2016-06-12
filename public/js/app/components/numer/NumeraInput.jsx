@@ -4,23 +4,19 @@
  * @description React Component, text input for triggering numerological calculation
  */
 
-var React,
- NumeraInput, NumeraChannel;
+const React = require('react');
 
-React = require('react');
+var NumeraInput, NumeraChannel;
 
 NumeraChannel = require('../../channels').numerology;
 NumeraInput  = React.createClass({
   getInitialState: function() {
-    var self;
-    self = this;
+    'use strict';
     // decoded to state object
-    return {decoded: null}; 
+    return { decoded: null }; 
   },
   componentDidMount: function() {
-    var route, self, consts;
-
-    self = this;
+    'use strict';
 
   },
 /**
@@ -31,11 +27,12 @@ NumeraInput  = React.createClass({
 * @returns {null}
 */
   decode: function(event) {
+    'use strict';
     NumeraChannel.calculate(event.target.value);
   },
   render: function() {
     return <div>
-      <textarea value={this.props.coded} onBlur={this.decode}></textarea>
+      <textarea value={ this.props.coded } onBlur={ this.decode }></textarea>
     </div>
   }
 });

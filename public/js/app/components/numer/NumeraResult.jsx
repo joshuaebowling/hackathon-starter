@@ -1,13 +1,12 @@
 /**
- * @class NumeraInput
+ * @class NumeraResult
  * @version 1.0.0
- * @description React Component, text input for triggering numerological calculation
+ * @description React Component, outer-most component for numerolgy transformation (numera)
  */
 
-var React,
- NumeraChannel, NumeraResult, NumeraWordLetters, NumeraWords, NumeraWordValues;
+const React = require('react');
 
-React = require('react');
+var NumeraChannel, NumeraResult, NumeraWordLetters, NumeraWordValues, NumeraWords;
 
 NumeraChannel = require('../../channels').numerology;
 NumeraWords = require('./NumeraWords.jsx');
@@ -16,16 +15,12 @@ NumeraWordLetters = require('./NumeraWordLetters.jsx');
 
 NumeraResult = React.createClass({
   getInitialState: function() {
-    var self;
-    self = this;
-    // decoded to state object
-    return {decoded: null}; 
+    'use strict';
+    return { decoded: null }; 
 
   },
   componentDidMount: function() {
-    var route, self, consts;
-
-    self = this;
+   'use strict';
   },
   render: function() {
     return (

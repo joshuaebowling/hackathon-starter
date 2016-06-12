@@ -3,25 +3,24 @@
  * @version 1.0.0
  * @description Provides Service for Calculating the Numerological Value of a P, utils
  */
-var _ = require('underscore'),
-Promise = require('promise');
+const _ = require('underscore');
 
-var calculate, channel, channelHelpers, showLetters, numerologyConstants, _subscriptions, subscriptions;
+var calculate, channel, channelHelpers, showLetters, numerologyConstants, subscriptions;
 
 channel = require('./baseChannel');
-numerologyConstants = require('../constants').numerology;
 channelHelpers = require('../utils').channelHelpers;
+numerologyConstants = require('../constants').numerology;
 
 subscriptions = {};
 
 // for each actionType there will be a function to subscribe to it without having
 // piece together the subscription string 
-_.each(numerologyConstants.ActionTypes, (value, label = '') => {
+_.each(numerologyConstants.ActionTypes, (value) => {
   subscriptions[value] = (todo) => {
     var result, route;
 
-    route = `${numerologyConstants.Base}.${value}`;
-    result = channel.subscribe(`${route}.${numerologyConstants.States.RESPONSE}`, todo);
+    route = `${ numerologyConstants.Base }.${ value }`;
+    result = channel.subscribe(`${ route }.${ numerologyConstants.States.RESPONSE }`, todo);
 
     return result;
   };
@@ -34,10 +33,11 @@ _.each(numerologyConstants.ActionTypes, (value, label = '') => {
 * @returns {null}
 */
 calculate = function(inText) {
+  'use strict';
   var route;
 
-  route = `${numerologyConstants.Base}.${numerologyConstants.ActionTypes.CALCULATE}.${numerologyConstants.States.REQUEST}`;
-  channel.publish(route, {text: inText});
+  route = `${ numerologyConstants.Base }.${ numerologyConstants.ActionTypes.CALCULATE }.${ numerologyConstants.States.REQUEST }`;
+  channel.publish(route, { text: inText });
 };
 
 /**
@@ -47,8 +47,9 @@ calculate = function(inText) {
 * @returns {null}
 */
 showLetters = function(letters) {
+  'use strict';
   var route;
-  console.log('letters0=',letters[0])
+
   route = `${ numerologyConstants.Base }.${ numerologyConstants.ActionTypes.LETTERS }.${ numerologyConstants.States.RESPONSE }`;
   channel.publish(route, letters);
 };

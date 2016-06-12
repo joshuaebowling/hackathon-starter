@@ -7,7 +7,7 @@
 module.exports = {
   /**
   * @function extractAction
-  * @memberof ChannelHelpers
+  * @memberof ChannelHelpers#
   * @name extractTopic
   * @returns {String} removes the channel and state, leaving the action type
   */

@@ -1,27 +1,23 @@
 /**
- * @class NumeraInput
+ * @class NumeraWordLetters
  * @version 1.0.0
- * @description React Component, text input for triggering numerological calculation
+ * @description React Component, Container letters for a given word component
  */
 
-const
- _ = require('underscore');
+const _ = require('underscore'),
+  React = require('react');
 
-var React,
-  NumeraChannel, NumeraWordLetters;
-
-React = require('react');
+var NumeraChannel, NumeraWordLetters;
 
 NumeraChannel = require('../../channels').numerology;
 NumeraWordLetters = React.createClass({
   getInitialState: function() {
-    var self;
-    self = this;
-    // decoded to state object
+    'use strict';
     return { letters: [] }; 
   },
   componentDidMount: function() {
-    var route, self, consts;
+    'use strict';
+    var consts, route, self;
 
     self = this;
     // subscribe when the calculation event is finished
@@ -35,7 +31,7 @@ NumeraWordLetters = React.createClass({
     var result =
     <table className="table table-responsive table-striped">
       <tbody>
-        <tr style={{minWidth:'50px'}}>
+        <tr style={ { minWidth:'50px' } }>
          { _.map(this.state.letters,(letter) => {
             return <td> { letter.letter } </td>
           }) }
