@@ -1,11 +1,7 @@
-var 
-constants = require('../../constants').base,
-React = require('react'),
-TestUtils = require('react/lib/ReactTestUtils');
+var constants = require('../../constants/base');
 
 describe('base constants', () => {
-  beforeAll(() => {
-  });
+  beforeAll(() => {});
   beforeEach(() => {});
   afterEach(() => {});
 
