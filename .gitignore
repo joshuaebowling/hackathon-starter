@@ -23,6 +23,10 @@ bower_components
 # documentation directory
 doc
 
+# bundled scripts
+public/js/bundle.js.map
+public/js/bundle.js
+
 # Editors
 .idea
 *.iml
