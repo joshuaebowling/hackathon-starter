@@ -11,7 +11,7 @@
     "test": "npm run test-client;",
     "webpack": "webpack --config config/webpack.config.js",
     "document": "grunt jsdoc",
-    "jshint":"grunt jshint"
+    "jshint": "grunt jshint"
   },
   "dependencies": {
     "async": "^2.0.0-rc.4",
@@ -21,6 +21,7 @@
     "cheerio": "^0.20.0",
     "clockwork": "^0.1.4",
     "compression": "^1.6.2",
+    "config": "^1.21.0",
     "connect-redis": "^3.0.2",
     "dotenv": "^2.0.0",
     "errorhandler": "^1.4.3",

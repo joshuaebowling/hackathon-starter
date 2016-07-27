@@ -17,6 +17,7 @@ const sass = require('node-sass-middleware');
 const multer = require('multer');
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 const RedisStore = require('connect-redis')(session);
+const config = require('config');
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -45,7 +46,7 @@ const app = express();
 /**
  * Express configuration.
  */
-app.set('port', 8080);
+app.set('port', config.get('web').port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(compression());

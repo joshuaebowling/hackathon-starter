@@ -1701,6 +1701,11 @@
         }
       }
     },
+    "config": {
+      "version": "1.21.0",
+      "from": "config@latest",
+      "resolved": "https://registry.npmjs.org/config/-/config-1.21.0.tgz"
+    },
     "connect": {
       "version": "3.4.1",
       "from": "connect@>=3.3.5 <4.0.0",
